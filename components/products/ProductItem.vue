@@ -2,8 +2,8 @@
       <div class="product__wrapper mb-60">
           <div class="product__thumb">
               <nuxt-link :href="`/product-details/${item.id}`" class="w-img">
-                  <img :src="'https://coreshop-datahub.localhost/' + item.images[0].fullpath" alt="product-img">
-                  <img class="product__thumb-2" :src="'https://coreshop-datahub.localhost/' + item.images[0].fullpath" alt="product-img">
+                  <img :src="appConfig.baseUrl + item.images[0].fullpath" alt="product-img">
+                  <img class="product__thumb-2" :src="appConfig.baseUrl + item.images[0].fullpath" alt="product-img">
               </nuxt-link>
               <div class="product__action transition-3">
                   <a @click.prevent="wishlistState.add_wishlist_product(item)" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist">
@@ -61,10 +61,12 @@ export default defineComponent({
     }
   },
   setup() {
+    const appConfig = useAppConfig();
+    
     const store = useCartStore();
     const wishlistState = useWishlistStore();
     const compareState = useCompareStore();
-    return {store,wishlistState,compareState}
+    return {store,wishlistState,compareState,appConfig}
   }
 })
 </script>

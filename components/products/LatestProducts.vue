@@ -65,7 +65,7 @@ export default defineComponent({
 
     const { data } = await useAsyncQuery(query)
 
-    return {data};
+    return { data };
   },
   data() {
     return {
