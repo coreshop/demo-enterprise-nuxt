@@ -11,6 +11,9 @@ RUN yarn install && yarn cache clean --force
 
 ADD . /app
 
+ARG API_URL
+ENV API_URL=$API_URL
+
 RUN yarn run build
 
 FROM node:18-alpine
