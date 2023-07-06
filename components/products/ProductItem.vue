@@ -62,7 +62,7 @@ export default defineComponent({
   },
   setup() {
     const appConfig = useAppConfig();
-    
+
     const store = useCartStore();
     const wishlistState = useWishlistStore();
     const compareState = useCompareStore();
