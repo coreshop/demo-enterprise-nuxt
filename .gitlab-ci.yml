@@ -6,6 +6,7 @@ variables:
     TAG: $CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA
     APP_ENV: dev
     GCP_URL: europe-west3-docker.pkg.dev
+    API_URL: https://demo4.coreshop.org/pimcore-graphql-webservices/coreshop?apikey=cccffae4fb6834f6a3d7eef35e890777
 
 build_and_push:
     stage: build
