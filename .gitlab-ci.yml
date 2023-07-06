@@ -16,7 +16,7 @@ build_and_push:
         - base64 -d $GOOGLE_ARTIFACT_REGISTRY | docker login -u _json_key --password-stdin https://$GCP_URL
         - export GCP_REGISTRY_IMAGE=$(echo "$GCP_URL/cors-wolke/cors/$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
     script:
-        - docker build . --tag $GCP_REGISTRY_IMAGE/headless:$TAG --target=cors_php --build-arg COMPOSER_AUTH="$COMPOSER_AUTH"
+        - docker build . --tag $GCP_REGISTRY_IMAGE/headless:$TAG
         - docker push $GCP_REGISTRY_IMAGE/headless:$TAG
     tags:
         - cors
