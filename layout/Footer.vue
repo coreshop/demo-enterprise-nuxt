@@ -1,0 +1,27 @@
+<template>
+  <footer id="footer-area">
+    <div class="copyright">
+      <div class="container">
+
+        <p class="pull-left">
+          &copy; CoreShop GmbH (GPLv3 and CoreShop Commercial License) | <a href="https://www.coreshop.org">https://www.coreshop.org</a>
+        </p>
+
+        <ul class="pull-right list-inline">
+          <li class="list-inline-item">
+            <a href="https://www.github.com/coreshop/CoreShop"><i class="fa fa-github text-white"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://www.coreshop.org"><i class="fa fa-globe text-white"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://www.facebook.com/coreshop.onlineshop"><i class="fa fa-facebook text-white"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</template>
+<script setup lang="ts">
+
+</script>

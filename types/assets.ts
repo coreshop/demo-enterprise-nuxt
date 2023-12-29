@@ -1,6 +1,6 @@
 
 interface AssetType {
-  fullpath:string,
+  fullpath: string,
 }
 
 export default AssetType;

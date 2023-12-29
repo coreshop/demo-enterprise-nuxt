@@ -1,17 +1,18 @@
 <template>
-  <NuxtPage></NuxtPage>
+
 </template>
 
 <script lang="ts">
+// external
 import {defineComponent} from 'vue';
-import {useCartStore} from './store/cart';
 
 export default defineComponent({
+  components: {},
+  data: () => {
+    return {}
+  },
+  methods: {},
   setup() {
-    const state = useCartStore();
-    state.loadCart();
-    return {state}
   },
 })
 </script>
-

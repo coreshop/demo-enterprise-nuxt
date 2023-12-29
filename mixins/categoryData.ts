@@ -12,42 +12,33 @@ export default {
       categoryData:[
         {
           id: 1,
-          img: cate_img_1,
-          parentTitle: "Lighting & Chair",
+          name: "Lighting & Chair",
+          slug: 'lighting-chair',
           children:['Lighting','Chair']
         },
         {
           id: 2,
-          img: cate_img_2,
-          parentTitle: "Decoration & Accessories",
+          name: "Decoration & Accessories",
+          slug: 'decoration-accessories',
           children:['Decoration','Accessories']
         },
         {
           id: 3,
-          img: cate_img_3,
-          parentTitle: "Clothing & Oil",
+          name: "Clothing & Oil",
+          slug: 'clothing-oil',
           children:['Clothing','Oil']
         },
         {
           id: 4,
-          img: cate_img_4, 
-          parentTitle: "FASHION FOR MEN’S",
+          name: "Fashion for Men's",
+          slug: 'fashion-mens',
           children:['Shirt'],
-          smDesc:"Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum."
         },
         {
           id: 5,
-          img: cate_img_5, 
-          parentTitle: "FASHION FOR WOMEN’S",
+          name: "Fashion for Women’s",
+          slug: 'fashion-womens',
           children:['Shoes'],
-          smDesc:"Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum."
-        },
-        {
-          id: 6,
-          img: cate_img_6, 
-          parentTitle: "FASHION FOR MEN’S",
-          children:['Shirt'],
-          smDesc:"Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum."
         },
       ] as CategoryType []
     }

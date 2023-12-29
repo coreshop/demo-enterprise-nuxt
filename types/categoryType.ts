@@ -1,9 +1,13 @@
-interface CategoryType {
-  id:number,
-  img?:string,
-  parentTitle:string,
-  children?:string[],
-  smDesc?:string,
+
+interface CoreShopCategory {
+    node: CoreShopCategoryNode
 }
 
-export default CategoryType;
+interface CoreShopCategoryNode {
+    id: string,
+    name: string,
+    slug: PimcoreSlugType,
+}
+
+
+export {CoreShopCategory, CoreShopCategoryNode};

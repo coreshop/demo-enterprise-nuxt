@@ -1,10 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   css: [
-    "bootstrap/scss/bootstrap.scss",
-    "vue3-carousel/dist/carousel.css",
-    "~/assets/scss/main.scss",
+    "~/assets/css/mail.css",
+    "~/assets/css/owl.carousel.css",
+    "~/assets/css/shop.css",
   ],
+  ssr: false,
   modules: [
     [
       '@pinia/nuxt',
@@ -20,11 +21,20 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "Outstock - Clean, Minimal eCommerce Vue Nuxt 3 Template",
+      title: "CoreShop Headless DEmo",
       // link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}],
       script: [
         {
-          src: "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js",
+          src: "/js/vendor/jquery-1.11.1.min.js",
+        },
+        {
+          src: "/js/vendor/owl.carousel.min.js",
+        },
+        {
+          src: "/js/vendor/bootstrap.js",
+        },
+        {
+          src: "/js/vendor/popper.js",
         },
       ]
     }
@@ -33,7 +43,7 @@ export default defineNuxtConfig({
   apollo: {
     clients: {
       default: {
-        httpEndpoint: process.env.API_URL ||'https://coreshop-datahub.localhost/pimcore-graphql-webservices/test?apikey=cccffae4fb6834f6a3d7eef35e890777'
+        httpEndpoint: process.env.API_URL ||'https://coreshop-headless.localhost/pimcore-graphql-webservices/test?apikey=cccffae4fb6834f6a3d7eef35e890777'
       }
     },
   },

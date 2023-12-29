@@ -1,25 +1,27 @@
 <template>
   <layout>
-<!--    <home-hero-slider />-->
-<!--    <category-area />-->
-    <latest-products />
-<!--    <shop-banner/>-->
+    <!--    <home-hero-slider />-->
+    <!--    <category-area />-->
+    <!--    <latest-products />-->
+    <!--    <shop-banner/>-->
     <!--<sale-off-product/>-->
     <!--<client-brand-slider/>-->
     <!--<blog-area/>-->
     <!--<subscribe-area/>-->
+    <LatestProducts/>
   </layout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {defineComponent} from "vue";
 import Layout from "~~/layout/Layout.vue";
-import LatestProducts from "~~/components/products/LatestProducts.vue";
+import LatestProducts from "~/components/product/LatestProducts.vue";
 
 export default defineComponent({
   components: {
-    Layout,
     LatestProducts,
+    Layout,
+    // LatestProducts,
   },
   setup: async () => {
 

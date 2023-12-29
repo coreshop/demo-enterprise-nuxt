@@ -1,0 +1,47 @@
+<template>
+  <!--  {% if customer and customer.user %}-->
+  <!--  <li class="nav-item">-->
+  <!--    <a class="nav-link" href="{{ path('coreshop_customer_profile') }}">-->
+  <!--      {{ 'coreshop.ui.account'|trans }}-->
+  <!--    </a>-->
+  <!--  </li>-->
+  <!--  <li class="nav-item">-->
+  <!--    <a class="nav-link" href="{{ path('coreshop_cart_summary') }}">-->
+  <!--      {{ 'coreshop.ui.shopping_cart'|trans }}-->
+  <!--    </a>-->
+  <!--  </li>-->
+  <!--  <li class="nav-item">-->
+  <!--    <a class="nav-link" href="{{ path('coreshop_checkout', {'stepIdentifier': coreshop_checkout_steps_get_first()}) }}">-->
+  <!--      {{ 'coreshop.ui.checkout'|trans }}-->
+  <!--    </a>-->
+  <!--  </li>-->
+  <!--  <li class="nav-item">-->
+  <!--    <a class="nav-link" href="{{ path('coreshop_logout') }}" {{ coreshop_test_html_attribute('logout-button') }}>-->
+  <!--    {{ 'coreshop.ui.logout'|trans }}-->
+  <!--    </a>-->
+  <!--  </li>-->
+  <!--  {% else %}-->
+  <li class="nav-item">
+    <nuxt-link :href="`/register`" class="nav-link">Register</nuxt-link>
+  </li>
+  <li class="nav-item">
+    <nuxt-link :href="`/login`" class="nav-link">Login</nuxt-link>
+  </li>
+  <!--  {% endif %}-->
+
+</template>
+
+<script lang="ts">
+// external
+import {defineComponent} from 'vue';
+
+export default defineComponent({
+  components: {},
+  data: () => {
+    return {}
+  },
+  methods: {},
+  setup() {
+  },
+})
+</script>
