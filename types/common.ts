@@ -1,3 +1,0 @@
-interface PimcoreSlugType {
-    slug: string,
-}

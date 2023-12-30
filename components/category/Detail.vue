@@ -1,29 +1,24 @@
 <template>
   <Breadcrumb :name="category.name"/>
 
-  <list v-for="product in products" :product="product"/>
+  <div class="row">
+    <CategoryList v-for="product in products" :product="product"/>
+  </div>
 </template>
 
 <script lang="ts">
-import {defineComponent , PropType} from "vue";
-import Breadcrumb from "~/components/breadcrumb/Breadcrumb.vue";
-import List from "~/components/category/List.vue";
-import {CoreShopCategoryNode} from "~/types/categoryType";
-import {CoreShopProductNode} from "~/types/productType";
+import type { PropType } from "vue";
+import type { Object_CoreShopCategory, Object_CoreShopProduct } from "~/graphql/generated";
 
 export default defineComponent({
-  components: {
-    List,
-    Breadcrumb,
-  },
   props: {
     category: {
-      type: Object as PropType<CoreShopCategoryNode>,
+      type: Object as PropType<Object_CoreShopCategory>,
       default: {},
       required: true
     },
     products: {
-      type: Array as PropType<CoreShopProductNode[]>,
+      type: Array as PropType<Object_CoreShopProduct[]>,
       default: [],
       required: true
     }

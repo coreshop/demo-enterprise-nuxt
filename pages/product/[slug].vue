@@ -1,34 +1,37 @@
 <template>
-  <layout-column>
+  <NuxtLayout :name="`column`">
     <template v-slot:sidebar>
-      <MenuLeft/>
+      <CategoryMenuLeft />
     </template>
-    <ProductDetail :product="product"/>
-  </layout-column>
+    <ProductDetail v-if="product" :product="product"/>
+  </NuxtLayout>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
-import ProductDetail from "~/components/product/Detail.vue";
-import LayoutColumn from "~/layout/LayoutColumn.vue";
-import MenuLeft from "~/components/category/MenuLeft.vue";
-import {useProductStore} from "~/store/products";
+import { defineComponent } from "vue";
+import { useGetCoreShopProductQuery } from "../../graphql/generated";
 
 export default defineComponent({
-  components: {
-    MenuLeft,
-    LayoutColumn,
-    ProductDetail,
-  },
-  async setup() {
-    const productState = useProductStore();
-    const slug = useRoute().params.slug as string;
-    const product = await productState.loadProduct(parseInt(slug));
-
-    useHead({
-      title: product?.name,
+  setup() {
+    const id = parseInt(useRoute().params.slug as string);
+    const { result, loading, error } = useGetCoreShopProductQuery({
+      productId: id,
     });
-    return {product}
+
+    const product = computed(() => {
+      if (result?.value?.CoreShopProduct?.__typename === "CoreShopProductResult")
+      {
+        return result?.value?.CoreShopProduct?.product;
+      }
+
+      return null;
+    });
+
+    return {
+      product: product,
+      loading,
+      error,
+    };
   },
 });
 </script>

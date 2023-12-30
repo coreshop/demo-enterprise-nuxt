@@ -1,5 +1,7 @@
 import {defineStore} from 'pinia'
 import {CoreShopProduct, CoreShopProductNode} from "~/types/productType";
+import { useCoreShopLatestProductsQuery, type CoreShopLatestProductsQuery, type Object_CoreShopProduct } from '@/graphql/generated'
+
 
 export const useProductStore = defineStore({
     id: 'product',
@@ -66,5 +68,19 @@ export const useProductStore = defineStore({
                 return product.node
             });
         },
+        async getLatestProducts(): Promise<Object_CoreShopProduct[]|null> {
+
+          const result = await useAsyncQuery<CoreShopLatestProductsQuery>(gql`${useCoreShopLatestProductsQuery}`);
+
+          const data = result.data.value.CoreShopLatestProducts;
+
+          if (data?.__typename === 'CoreShopLatestProductsResult') {
+            return data.products?.edges?.map((product: CoreShopProductNode) => {
+              return product.node
+            }) as Object_CoreShopProduct[];
+          }
+
+          return null;
+        }
     }
 })

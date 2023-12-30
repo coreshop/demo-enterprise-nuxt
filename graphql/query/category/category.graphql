@@ -1,0 +1,13 @@
+query getCoreShopCategory($categoryId: Int!) {
+    CoreShopCategory(category: {categoryId: $categoryId}) {
+        ... on CoreShopCategoryResult {
+            category {
+            id
+            name
+            }
+        }
+        ... on CoreShopError {
+            message
+        }
+    }
+}

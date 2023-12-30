@@ -1,0 +1,18 @@
+query getCoreShopCategories($storeName: String!) {
+    CoreShopCategories(categoryListing: {store: {storeName: $storeName}}) {
+    ... on CoreShopCategoriesResult {
+        categories {
+        totalCount,
+        edges {
+            node {
+            id
+            name
+            }
+        }
+    }
+    }
+    ... on CoreShopError {
+        message
+    }
+}
+}

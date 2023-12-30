@@ -16,7 +16,7 @@
             </ul>
             <ul class="navbar-nav">
               <li class="nav-item">
-                <nuxt-link :href="`/wishlist`" class="nav-link">Wishlist</nuxt-link>
+                <nuxt-link :href="`#`" class="nav-link">Wishlist</nuxt-link>
               </li>
               <li class="nav_item">
                 <CartWidget/>
@@ -27,9 +27,8 @@
                   Language
                 </a>
                 <div class="dropdown-menu" aria-labelledby="languageDropdown">
-                  <!--                  TODO-->
-                  <nuxt-link :href="`/de`" class="dropdown-item">de</nuxt-link>
-                  <nuxt-link :href="`/en`" class="dropdown-item">en</nuxt-link>
+                  <nuxt-link :href="`#`" class="dropdown-item">de</nuxt-link>
+                  <nuxt-link :href="`#`" class="dropdown-item">en</nuxt-link>
                 </div>
               </li>
             </ul>
@@ -57,26 +56,6 @@
       </div>
     </div>
 
-    <Menu/>
+    <CategoryMenu/>
   </header>
 </template>
-
-<script lang="ts">
-import {defineComponent} from "vue";
-import CartWidget from '../components/cart/Widget.vue';
-import CustomerWidget from '../components/customer/Widget.vue';
-import SearchWidget from '../components/search/Widget.vue';
-import Menu from '../components/category/Menu.vue';
-
-export default defineComponent({
-  components: {CartWidget, CustomerWidget, SearchWidget, Menu},
-  data() {
-    return {}
-  },
-  methods: {},
-  setup() {
-  },
-  mounted() {
-  },
-})
-</script>

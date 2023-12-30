@@ -4,11 +4,11 @@
   <div class="row product-info">
 
     <div class="col-sm-5 images-block">
-      <img v-if="product.images.length > 0" :src="product.images[0].fullpath" class="img-fluid img-thumbnail">
+      <nuxt-img v-if="product.images?.length > 0" provider="pimcore" :src="product.images[0].fullpath" class="img-fluid img-thumbnail" />
 
-      <div class="row" v-if="product.images.length > 0">
+      <div class="row" v-if="product.images?.length > 0">
         <div class="col-12 col-sm-6" v-for="image in product.images" :key="image.fullpath">
-          <img :src="image.fullpath" class="img-fluid img-thumbnail">
+          <nuxt-img provider="pimcore" :src="image.fullpath" class="img-fluid img-thumbnail" />
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
 
       <ul class="list-unstyled manufacturer">
         <li v-if="product.ean"><span>EAN:</span> {{ product.ean }}</li>
-        <li>
+        <!-- <li>
           <span>Availability:</span>
           <span v-if="product.isTracked">
             <span v-if="product.stockAvailable">
@@ -34,7 +34,7 @@
               <span>Out of Stock</span>
             </span>
           </span>
-        </li>
+        </li> -->
       </ul>
       <hr/>
 
@@ -54,8 +54,7 @@
           <form name="coreshop" method="post" action="">
             <div class="input-group">
               <div>
-                <input type="number" name="quantity" required="required" class="form-control cart-item-quantity"
-                       value="1">
+                <input type="number" name="quantity" class="form-control cart-item-quantity" value="1">
               </div>
               <div class="input-group-append ml-2">
                 <button type="submit" class="btn btn-cart mt-0" rel="nofollow">
@@ -72,17 +71,13 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType} from "vue";
-import Breadcrumb from "~/components/breadcrumb/Breadcrumb.vue";
-import {CoreShopProductNode} from "~/types/productType";
+import type { PropType } from "vue";
+import type { ProductFragment } from "~/graphql/generated";
 
 export default defineComponent({
-  components: {
-    Breadcrumb,
-  },
   props: {
     product: {
-      type: Object as PropType<CoreShopProductNode>,
+      type: Object as PropType<ProductFragment>,
       default: {},
       required: true
     },

@@ -1,0 +1,11 @@
+fragment product on object_CoreShopProduct {
+  id
+  name
+  images {
+    ... on asset {
+      fullpath
+    }
+  }
+  price: wholesalePrice
+  shortDescription
+}

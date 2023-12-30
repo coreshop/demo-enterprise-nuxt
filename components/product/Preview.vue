@@ -1,13 +1,13 @@
 <template>
   <div class="product-col">
     <div class="image">
-      <nuxt-link v-if="product.images.length > 0" :href="`/product/${product.slug}`" class="nav-link">
-        <img :src="product.images[0].fullpath" class="img-fluid">
+      <nuxt-link v-if="product.images.length > 0" :href="`/product/${product.id}`" class="nav-link">
+        <nuxt-img provider="pimcore" :src="product.images[0].fullpath" class="img-fluid img-thumbnail" />
       </nuxt-link>
     </div>
     <div class="caption">
       <h4>
-        <nuxt-link :href="`/product/${product.slug}`">
+        <nuxt-link :href="`/product/${product.id}`">
           {{ product.name }}
         </nuxt-link>
       </h4>
@@ -37,15 +37,13 @@
 </template>
 
 <script lang="ts">
-// external
-import {defineComponent} from 'vue';
-import {PropType} from "vue/dist/vue";
-import ProductType from "~/types/productType";
+import type { PropType } from 'vue';
+import type { object_CoreShopProduct } from '../../graphql/generated';
 
 export default defineComponent({
   props: {
     product: {
-      type: Object as PropType<ProductType>,
+      type: Object as PropType<Object_CoreShopProduct>,
       default: {},
       required: true
     }

@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  devtools: { enabled: true },
   css: [
     "~/assets/css/mail.css",
     "~/assets/css/owl.carousel.css",
@@ -17,7 +18,19 @@ export default defineNuxtConfig({
       },
     ],
     '@nuxtjs/apollo',
+    '@nuxt/image',
   ],
+  image: {
+    providers: {
+      pimcore: {
+        name: 'pimcore',
+        provider: '~/providers/pimcore.ts',
+        options: {
+          baseURL: "https://coreshop-headless.localhost"
+        }
+      }
+    },
+  },
 
   app: {
     head: {
@@ -43,16 +56,9 @@ export default defineNuxtConfig({
   apollo: {
     clients: {
       default: {
-        httpEndpoint: process.env.API_URL ||'https://coreshop-headless.localhost/pimcore-graphql-webservices/test?apikey=cccffae4fb6834f6a3d7eef35e890777'
+        httpEndpoint: process.env.API_URL ||'https://coreshop-headless.localhost/pimcore-graphql-webservices/test?apikey=cccffae4fb6834f6a3d7eef35e890777',
+        
       }
     },
-  },
-
-  devtools: {
-    enabled: true,
-  },
-
-  build: {
-    transpile: ["tslib"], //https://github.com/nuxt/nuxt/discussions/21533
   }
 })

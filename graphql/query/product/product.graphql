@@ -1,0 +1,23 @@
+#import "product-fragment.graphql"
+#import "../error.graphql"
+
+query getCoreShopProduct($productId: Int!) {
+  CoreShopProduct(product: { productId: $productId }) {
+    ... on CoreShopProductResult {
+      product {
+        id
+        name
+        images {
+          ... on asset {
+            fullpath
+          }
+        }
+        price: wholesalePrice
+        shortDescription
+      }
+    }
+    ... on CoreShopError {
+      ...error
+    }
+  }
+}

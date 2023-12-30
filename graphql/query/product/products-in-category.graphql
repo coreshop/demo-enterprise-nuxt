@@ -1,0 +1,25 @@
+query getCoreShopProductsInCategory($categoryId: Int!, $storeName: String!) {
+    CoreShopProducts(productListing: {store: {storeName: $storeName}, category: {categoryId: $categoryId}}) {
+    ... on CoreShopProductsResult {
+        products {
+        totalCount,
+        edges {
+            node {
+            id
+            name
+            images {
+                ... on asset {
+                fullpath
+                }
+            }
+            price: wholesalePrice
+            shortDescription
+            }
+        }
+        }
+    }
+    ... on CoreShopError {
+        message
+    }
+    }
+}
