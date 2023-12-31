@@ -6,6 +6,7 @@ fragment product on object_CoreShopProduct {
       fullpath
     }
   }
-  price: wholesalePrice
+  isTracked
+  stockAvailability
   shortDescription
 }

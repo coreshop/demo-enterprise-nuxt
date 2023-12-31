@@ -23,30 +23,20 @@
       <hr/>
 
       <ul class="list-unstyled manufacturer">
-        <li v-if="product.ean"><span>EAN:</span> {{ product.ean }}</li>
-        <!-- <li>
+        <li v-if="product.ean"><span>EAN:</span>{{ product.ean }}</li>
+        <li>
           <span>Availability:</span>
-          <span v-if="product.isTracked">
-            <span v-if="product.stockAvailable">
-              <strong class="label label-success">In Stock</strong>
-            </span>
-            <span v-else>
-              <span>Out of Stock</span>
-            </span>
+          <span v-if="product.stockAvailability">
+            <strong class="label label-success">In Stock</strong>
           </span>
-        </li> -->
+          <span v-else>
+            <span>Out of Stock</span>
+          </span>
+        </li> 
       </ul>
       <hr/>
 
-      <div class="price">
-        <span class="price-head">Price:</span>
-        <span class="price-new">€{{ product.price.toFixed(2) }}</span>
-      </div>
-<!--      <div class="tax">-->
-<!--        <span>incl. {{ product.taxRate }}% Tax</span>-->
-<!--        <span>(€{{ product.tax.toFixed(2) }})</span>-->
-<!--      </div>-->
-
+      <product-price-widget :product="product" :show-tax="true" />
       <hr/>
 
       <div class="options">

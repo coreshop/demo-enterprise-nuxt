@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     "~/assets/css/owl.carousel.css",
     "~/assets/css/shop.css",
   ],
-  ssr: false,
+  ssr: true,
   modules: [
     [
       '@pinia/nuxt',

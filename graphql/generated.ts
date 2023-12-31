@@ -55,6 +55,13 @@ export type CategoryListingInput = {
   store: StoreInput;
 };
 
+export type ContextInput = {
+  currency?: InputMaybe<CurrencyInput>;
+  locale?: InputMaybe<LocaleInput>;
+  order?: InputMaybe<OrderInput>;
+  store: StoreInput;
+};
+
 export type CoreShopActiveOrderResult = {
   __typename?: 'CoreShopActiveOrderResult';
   order?: Maybe<Object_CoreShopOrder>;
@@ -194,6 +201,22 @@ export type CoreShopProductFilterListingConnection = {
   /** The total count of all queryable objects for this schema listing */
   totalCount?: Maybe<Scalars['Int']['output']>;
 };
+
+export type CoreShopProductPriceResult = {
+  __typename?: 'CoreShopProductPriceResult';
+  discount_gross?: Maybe<Scalars['Int']['output']>;
+  discount_net?: Maybe<Scalars['Int']['output']>;
+  discount_price_gross?: Maybe<Scalars['Int']['output']>;
+  discount_price_net?: Maybe<Scalars['Int']['output']>;
+  price_gross?: Maybe<Scalars['Int']['output']>;
+  price_net?: Maybe<Scalars['Int']['output']>;
+  retail_price_gross?: Maybe<Scalars['Int']['output']>;
+  retail_price_net?: Maybe<Scalars['Int']['output']>;
+  tax_amount?: Maybe<Scalars['Int']['output']>;
+  tax_rate?: Maybe<Scalars['Float']['output']>;
+};
+
+export type CoreShopProductPriceUnionResult = CoreShopError | CoreShopProductPriceResult | CoreShopValidationError;
 
 export type CoreShopProductResult = {
   __typename?: 'CoreShopProductResult';
@@ -601,6 +624,10 @@ export enum CountryEnumType {
   Austria = 'Austria'
 }
 
+export type CurrencyInput = {
+  iso: Scalars['String']['input'];
+};
+
 export type CustomerInput = {
   address: AddressInput;
   email: Scalars['String']['input'];
@@ -629,6 +656,10 @@ export type FilterListingInput = {
 
 export type LatestProductsInput = {
   store: StoreInput;
+};
+
+export type LocaleInput = {
+  locale: Scalars['String']['input'];
 };
 
 export type LoginInput = {
@@ -744,6 +775,11 @@ export type ProductListingInput = {
   store: StoreInput;
 };
 
+export type ProductPriceInput = {
+  context: ContextInput;
+  productId: Scalars['Int']['input'];
+};
+
 export type Query = {
   __typename?: 'Query';
   CoreShopActiveOrder?: Maybe<CoreShopActiveOrderUnionResult>;
@@ -753,6 +789,7 @@ export type Query = {
   CoreShopLatestProducts?: Maybe<CoreShopLatestProductsUnionResult>;
   CoreShopMe?: Maybe<CoreShopMeUnionResult>;
   CoreShopProduct?: Maybe<CoreShopProductUnionResult>;
+  CoreShopProductPrice?: Maybe<CoreShopProductPriceUnionResult>;
   CoreShopProducts?: Maybe<CoreShopProductsUnionResult>;
 };
 
@@ -784,6 +821,11 @@ export type QueryCoreShopLatestProductsArgs = {
 
 export type QueryCoreShopProductArgs = {
   product?: InputMaybe<ProductInput>;
+};
+
+
+export type QueryCoreShopProductPriceArgs = {
+  productPrice?: InputMaybe<ProductPriceInput>;
 };
 
 
@@ -1502,6 +1544,7 @@ export type Object_CoreShopProduct = Element & {
   shortDescription?: Maybe<Scalars['String']['output']>;
   sku?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Array<Maybe<UrlSlug>>>;
+  stockAvailability?: Maybe<Scalars['Boolean']['output']>;
   storeValues?: Maybe<Array<Maybe<CoreshopProductStoreValues>>>;
   stores?: Maybe<Array<Maybe<CoreshopStore>>>;
   tags?: Maybe<Array<Maybe<Element_Tag>>>;
@@ -1692,16 +1735,24 @@ export type GetCoreShopLatestProductsQueryVariables = Exact<{
 }>;
 
 
-export type GetCoreShopLatestProductsQuery = { __typename?: 'Query', CoreShopLatestProducts?: { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopLatestProductsResult', products?: { __typename?: 'CoreShopProductConnection', edges?: Array<{ __typename?: 'CoreShopProductEdge', node?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, shortDescription?: string | null, price?: number | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | null> | null } | null } | { __typename?: 'CoreShopValidationError' } | null };
+export type GetCoreShopLatestProductsQuery = { __typename?: 'Query', CoreShopLatestProducts?: { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopLatestProductsResult', products?: { __typename?: 'CoreShopProductConnection', edges?: Array<{ __typename?: 'CoreShopProductEdge', node?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | null> | null } | null } | { __typename?: 'CoreShopValidationError' } | null };
 
-export type ProductFragment = { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, shortDescription?: string | null, price?: number | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null };
+export type GetCoreShopProductPriceQueryVariables = Exact<{
+  productId: Scalars['Int']['input'];
+  storeName: Scalars['String']['input'];
+}>;
+
+
+export type GetCoreShopProductPriceQuery = { __typename?: 'Query', CoreShopProductPrice?: { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopProductPriceResult', price_net?: number | null, price_gross?: number | null, retail_price_net?: number | null, retail_price_gross?: number | null, discount_price_net?: number | null, discount_price_gross?: number | null, discount_net?: number | null, discount_gross?: number | null, tax_amount?: number | null, tax_rate?: number | null } | { __typename?: 'CoreShopValidationError' } | null };
+
+export type ProductFragment = { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null };
 
 export type GetCoreShopProductQueryVariables = Exact<{
   productId: Scalars['Int']['input'];
 }>;
 
 
-export type GetCoreShopProductQuery = { __typename?: 'Query', CoreShopProduct?: { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopProductResult', product?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, shortDescription?: string | null, price?: number | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | { __typename?: 'CoreShopValidationError' } | null };
+export type GetCoreShopProductQuery = { __typename?: 'Query', CoreShopProduct?: { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopProductResult', product?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, ean?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | { __typename?: 'CoreShopValidationError' } | null };
 
 export type GetCoreShopProductsInCategoryQueryVariables = Exact<{
   categoryId: Scalars['Int']['input'];
@@ -1725,7 +1776,8 @@ export const ProductFragmentDoc = gql`
       fullpath
     }
   }
-  price: wholesalePrice
+  isTracked
+  stockAvailability
   shortDescription
 }
     `;
@@ -1852,6 +1904,53 @@ export function useGetCoreShopLatestProductsLazyQuery(variables: GetCoreShopLate
   return VueApolloComposable.useLazyQuery<GetCoreShopLatestProductsQuery, GetCoreShopLatestProductsQueryVariables>(GetCoreShopLatestProductsDocument, variables, options);
 }
 export type GetCoreShopLatestProductsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetCoreShopLatestProductsQuery, GetCoreShopLatestProductsQueryVariables>;
+export const GetCoreShopProductPriceDocument = gql`
+    query getCoreShopProductPrice($productId: Int!, $storeName: String!) {
+  CoreShopProductPrice(
+    productPrice: {productId: $productId, context: {store: {storeName: $storeName}}}
+  ) {
+    ... on CoreShopProductPriceResult {
+      price_net
+      price_gross
+      retail_price_net
+      retail_price_gross
+      discount_price_net
+      discount_price_gross
+      discount_net
+      discount_gross
+      tax_amount
+      tax_rate
+    }
+    ... on CoreShopError {
+      ...error
+    }
+  }
+}
+    ${ErrorFragmentDoc}`;
+
+/**
+ * __useGetCoreShopProductPriceQuery__
+ *
+ * To run a query within a Vue component, call `useGetCoreShopProductPriceQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCoreShopProductPriceQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetCoreShopProductPriceQuery({
+ *   productId: // value for 'productId'
+ *   storeName: // value for 'storeName'
+ * });
+ */
+export function useGetCoreShopProductPriceQuery(variables: GetCoreShopProductPriceQueryVariables | VueCompositionApi.Ref<GetCoreShopProductPriceQueryVariables> | ReactiveFunction<GetCoreShopProductPriceQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetCoreShopProductPriceQuery, GetCoreShopProductPriceQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetCoreShopProductPriceQuery, GetCoreShopProductPriceQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetCoreShopProductPriceQuery, GetCoreShopProductPriceQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetCoreShopProductPriceQuery, GetCoreShopProductPriceQueryVariables>(GetCoreShopProductPriceDocument, variables, options);
+}
+export function useGetCoreShopProductPriceLazyQuery(variables: GetCoreShopProductPriceQueryVariables | VueCompositionApi.Ref<GetCoreShopProductPriceQueryVariables> | ReactiveFunction<GetCoreShopProductPriceQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetCoreShopProductPriceQuery, GetCoreShopProductPriceQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetCoreShopProductPriceQuery, GetCoreShopProductPriceQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetCoreShopProductPriceQuery, GetCoreShopProductPriceQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetCoreShopProductPriceQuery, GetCoreShopProductPriceQueryVariables>(GetCoreShopProductPriceDocument, variables, options);
+}
+export type GetCoreShopProductPriceQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetCoreShopProductPriceQuery, GetCoreShopProductPriceQueryVariables>;
 export const GetCoreShopProductDocument = gql`
     query getCoreShopProduct($productId: Int!) {
   CoreShopProduct(product: {productId: $productId}) {
@@ -1864,7 +1963,9 @@ export const GetCoreShopProductDocument = gql`
             fullpath
           }
         }
-        price: wholesalePrice
+        ean
+        isTracked
+        stockAvailability
         shortDescription
       }
     }

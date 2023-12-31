@@ -15,9 +15,7 @@
         {{ product.shortDescription }}
       </div>
 
-      <div class="price">
-        <span class="price-new">€{{ product.price.toFixed(2) }}</span>
-      </div>
+      <product-price-widget :product="product" />
 
       <div class="cart-button">
         <form name="coreshop" method="post" action="">
@@ -38,7 +36,7 @@
 
 <script lang="ts">
 import type { PropType } from 'vue';
-import type { object_CoreShopProduct } from '../../graphql/generated';
+import type { Object_CoreShopProduct } from '../../graphql/generated';
 
 export default defineComponent({
   props: {

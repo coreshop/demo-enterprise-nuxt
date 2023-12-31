@@ -12,7 +12,9 @@ query getCoreShopProduct($productId: Int!) {
             fullpath
           }
         }
-        price: wholesalePrice
+        ean
+        isTracked
+        stockAvailability
         shortDescription
       }
     }
