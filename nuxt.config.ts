@@ -26,7 +26,7 @@ export default defineNuxtConfig({
         name: 'pimcore',
         provider: '~/providers/pimcore.ts',
         options: {
-          baseURL: "https://coreshop-headless.localhost"
+          baseURL: process.env.BASE_URL || 'https://demo4-enterprise.coreshop.org/',
         }
       }
     },
@@ -56,7 +56,7 @@ export default defineNuxtConfig({
   apollo: {
     clients: {
       default: {
-        httpEndpoint: process.env.API_URL ||'https://coreshop-headless.localhost/pimcore-graphql-webservices/test?apikey=cccffae4fb6834f6a3d7eef35e890777',
+        httpEndpoint: process.env.API_URL || 'https://demo4-enterprise.coreshop.org/pimcore-graphql-webservices/coreshop?apikey=cccffae4fb6834f6a3d7eef35e890777',
         
       }
     },
