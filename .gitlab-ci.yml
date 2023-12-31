@@ -11,8 +11,8 @@ build_and_push:
     stage: build
     image: docker:stable
     variables:
-        API_URL: https://demo4.coreshop.org/pimcore-graphql-webservices/coreshop?apikey=cccffae4fb6834f6a3d7eef35e890777
-        BASE_URL: https://demo4.coreshop.org
+        API_URL: https://demo4-enterprise.coreshop.org/pimcore-graphql-webservices/coreshop?apikey=cccffae4fb6834f6a3d7eef35e890777
+        BASE_URL: https://demo4-enterprise.coreshop.org/
     rules:
         -   if: $CI_COMMIT_REF_NAME == "main" && $CI_PIPELINE_SOURCE != "schedule"
     before_script:
