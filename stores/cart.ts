@@ -1,6 +1,12 @@
 import {defineStore} from 'pinia'
-import {useCoreShopAddToOrderMutation, useCoreShopOrderLazyQuery, useCoreShopOrderQuery} from "~/graphql/generated";
+import {
+    useCoreShopAddToOrderMutation,
+    useCoreShopOrderLazyQuery,
+    useCoreShopOrderQuery, useCoreShopRemoveOrderItemMutation,
+    useCoreShopUpdateOrderItemMutation
+} from "~/graphql/generated";
 import type {Object_CoreShopOrder} from "~/graphql/generated";
+import {DEFAULT_OPERATION_TYPE_NAME_MAP} from "@graphql-tools/merge/typings/typedefs-mergers/schema-def";
 
 interface CartStoreState {
     cart: null | Object_CoreShopOrder;
@@ -38,6 +44,11 @@ export const useCartStore = defineStore({
                         this.cart = data.CoreShopOrder.order;
                     }
                 }
+                else if (data && data.CoreShopOrder?.__typename === 'CoreShopError') {
+                    this.cartToken = null;
+                    this.cart = null;
+                    localStorage.removeItem('coreShopOrderToken');
+                }
 
             }
 
@@ -45,11 +56,10 @@ export const useCartStore = defineStore({
         },
         async addToOrder(productId: number, quantity: number): Promise<void> {
             const client = useApolloClient();
-
             const {loading, mutate, onError} = useCoreShopAddToOrderMutation();
 
             this.cartLoading = true;
-            
+
             try {
                 const data = await mutate({
                     productId: productId,
@@ -67,10 +77,67 @@ export const useCartStore = defineStore({
                 }
 
             } catch (error) {
-                console.error('Fehler beim Hinzufügen zum Warenkorb:', error);
+                console.error(error);
+            }
+
+            this.cartLoading = false;
+        },
+        async updateOrderItem(orderItemId: number, quantity: number): Promise<void> {
+            const client = useApolloClient();
+            const {loading, mutate, onError} = useCoreShopUpdateOrderItemMutation();
+
+            if (!this.cartToken) {
+                return;
             }
 
             this.cartLoading = true;
+
+            try {
+                const data = await mutate({
+                    orderItemId: orderItemId,
+                    quantity: quantity,
+                    token: this.cartToken
+                });
+
+                if (data?.data?.CoreShopUpdateOrderItem?.__typename === 'CoreShopUpdateOrderItemResult') {
+                    if (data?.data.CoreShopUpdateOrderItem?.order?.__typename === 'object_CoreShopOrder') {
+                        this.cart = data?.data.CoreShopUpdateOrderItem.order;
+                    }
+                }
+
+            } catch (error) {
+                console.error(error);
+            }
+
+            this.cartLoading = false;
+        },
+        async removeOrderItem(orderItemId: number): Promise<void> {
+            const client = useApolloClient();
+            const {loading, mutate, onError} = useCoreShopRemoveOrderItemMutation();
+
+            if (!this.cartToken) {
+                return;
+            }
+
+            this.cartLoading = true;
+
+            try {
+                const data = await mutate({
+                    orderItemId: orderItemId,
+                    token: this.cartToken
+                });
+
+                if (data?.data?.CoreShopRemoveOrderItem?.__typename === 'CoreShopRemoveOrderItemResult') {
+                    if (data?.data.CoreShopRemoveOrderItem?.order?.__typename === 'object_CoreShopOrder') {
+                        this.cart = data?.data.CoreShopRemoveOrderItem.order;
+                    }
+                }
+
+            } catch (error) {
+                console.error(error);
+            }
+
+            this.cartLoading = false;
         },
     }
 })

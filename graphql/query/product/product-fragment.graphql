@@ -11,6 +11,11 @@ fragment product on object_CoreShopProduct {
       fullpath(thumbnail: "coreshop_productCartPreview")
     }
   }
+  imagesCartProduct: images {
+    ... on asset {
+      fullpath(thumbnail: "coreshop_productCart")
+    }
+  }
   isTracked
   stockAvailability
   shortDescription

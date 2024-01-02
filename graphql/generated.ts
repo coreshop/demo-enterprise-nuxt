@@ -1756,25 +1756,42 @@ export type CoreShopAddToOrderMutationVariables = Exact<{
 }>;
 
 
-export type CoreShopAddToOrderMutation = { __typename?: 'Mutations', CoreShopAddToOrder?: { __typename?: 'CoreShopAddToOrderResult', order?: { __typename?: 'object_CoreShopOrder', id?: string | null, token?: string | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, items?: Array<{ __typename?: 'object_CoreShopOrderItem', quantity?: number | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, product?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | null> | null } | null } | { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopValidationError' } | null };
+export type CoreShopAddToOrderMutation = { __typename?: 'Mutations', CoreShopAddToOrder?: { __typename?: 'CoreShopAddToOrderResult', order?: { __typename?: 'object_CoreShopOrder', id?: string | null, token?: string | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, items?: Array<{ __typename?: 'object_CoreShopOrderItem', id?: string | null, quantity?: number | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, itemRetailPriceGross?: number | null, itemRetailPriceNet?: number | null, itemDiscountNet?: number | null, itemDiscountGross?: number | null, itemDiscountPriceGross?: number | null, itemDiscountPriceNet?: number | null, product?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartProduct?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | null> | null, taxes?: Array<{ __typename?: 'fieldcollection_CoreShopTaxItem', name?: string | null, rate?: number | null, amount?: number | null } | null> | null, adjustmentItems?: Array<{ __typename?: 'fieldcollection_CoreShopAdjustment', typeIdentifier?: string | null, label?: string | null, pimcoreAmountNet?: number | null, pimcoreAmountGross?: number | null } | null> | null } | null } | { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopValidationError' } | null };
 
 export type CoreShopOrderQueryVariables = Exact<{
   token: Scalars['String']['input'];
 }>;
 
 
-export type CoreShopOrderQuery = { __typename?: 'Query', CoreShopOrder?: { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopOrderResult', order?: { __typename?: 'object_CoreShopOrder', id?: string | null, token?: string | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, items?: Array<{ __typename?: 'object_CoreShopOrderItem', quantity?: number | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, product?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | null> | null } | null } | { __typename?: 'CoreShopValidationError' } | null };
+export type CoreShopOrderQuery = { __typename?: 'Query', CoreShopOrder?: { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopOrderResult', order?: { __typename?: 'object_CoreShopOrder', id?: string | null, token?: string | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, items?: Array<{ __typename?: 'object_CoreShopOrderItem', id?: string | null, quantity?: number | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, itemRetailPriceGross?: number | null, itemRetailPriceNet?: number | null, itemDiscountNet?: number | null, itemDiscountGross?: number | null, itemDiscountPriceGross?: number | null, itemDiscountPriceNet?: number | null, product?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartProduct?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | null> | null, taxes?: Array<{ __typename?: 'fieldcollection_CoreShopTaxItem', name?: string | null, rate?: number | null, amount?: number | null } | null> | null, adjustmentItems?: Array<{ __typename?: 'fieldcollection_CoreShopAdjustment', typeIdentifier?: string | null, label?: string | null, pimcoreAmountNet?: number | null, pimcoreAmountGross?: number | null } | null> | null } | null } | { __typename?: 'CoreShopValidationError' } | null };
 
-export type OrderFragment = { __typename?: 'object_CoreShopOrder', id?: string | null, token?: string | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, items?: Array<{ __typename?: 'object_CoreShopOrderItem', quantity?: number | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, product?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | null> | null };
+export type OrderFragment = { __typename?: 'object_CoreShopOrder', id?: string | null, token?: string | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, items?: Array<{ __typename?: 'object_CoreShopOrderItem', id?: string | null, quantity?: number | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, itemRetailPriceGross?: number | null, itemRetailPriceNet?: number | null, itemDiscountNet?: number | null, itemDiscountGross?: number | null, itemDiscountPriceGross?: number | null, itemDiscountPriceNet?: number | null, product?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartProduct?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | null> | null, taxes?: Array<{ __typename?: 'fieldcollection_CoreShopTaxItem', name?: string | null, rate?: number | null, amount?: number | null } | null> | null, adjustmentItems?: Array<{ __typename?: 'fieldcollection_CoreShopAdjustment', typeIdentifier?: string | null, label?: string | null, pimcoreAmountNet?: number | null, pimcoreAmountGross?: number | null } | null> | null };
 
-export type OrderItemFragment = { __typename?: 'object_CoreShopOrderItem', quantity?: number | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, product?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null };
+export type OrderItemFragment = { __typename?: 'object_CoreShopOrderItem', id?: string | null, quantity?: number | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, itemRetailPriceGross?: number | null, itemRetailPriceNet?: number | null, itemDiscountNet?: number | null, itemDiscountGross?: number | null, itemDiscountPriceGross?: number | null, itemDiscountPriceNet?: number | null, product?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartProduct?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null };
+
+export type CoreShopRemoveOrderItemMutationVariables = Exact<{
+  orderItemId: Scalars['Int']['input'];
+  token: Scalars['String']['input'];
+}>;
+
+
+export type CoreShopRemoveOrderItemMutation = { __typename?: 'Mutations', CoreShopRemoveOrderItem?: { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopRemoveOrderItemResult', order?: { __typename?: 'object_CoreShopOrder', id?: string | null, token?: string | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, items?: Array<{ __typename?: 'object_CoreShopOrderItem', id?: string | null, quantity?: number | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, itemRetailPriceGross?: number | null, itemRetailPriceNet?: number | null, itemDiscountNet?: number | null, itemDiscountGross?: number | null, itemDiscountPriceGross?: number | null, itemDiscountPriceNet?: number | null, product?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartProduct?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | null> | null, taxes?: Array<{ __typename?: 'fieldcollection_CoreShopTaxItem', name?: string | null, rate?: number | null, amount?: number | null } | null> | null, adjustmentItems?: Array<{ __typename?: 'fieldcollection_CoreShopAdjustment', typeIdentifier?: string | null, label?: string | null, pimcoreAmountNet?: number | null, pimcoreAmountGross?: number | null } | null> | null } | null } | { __typename?: 'CoreShopValidationError' } | null };
+
+export type CoreShopUpdateOrderItemMutationVariables = Exact<{
+  orderItemId: Scalars['Int']['input'];
+  quantity: Scalars['Float']['input'];
+  token: Scalars['String']['input'];
+}>;
+
+
+export type CoreShopUpdateOrderItemMutation = { __typename?: 'Mutations', CoreShopUpdateOrderItem?: { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopUpdateOrderItemResult', order?: { __typename?: 'object_CoreShopOrder', id?: string | null, token?: string | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, items?: Array<{ __typename?: 'object_CoreShopOrderItem', id?: string | null, quantity?: number | null, totalGross?: number | null, totalNet?: number | null, subtotalGross?: number | null, subtotalNet?: number | null, itemRetailPriceGross?: number | null, itemRetailPriceNet?: number | null, itemDiscountNet?: number | null, itemDiscountGross?: number | null, itemDiscountPriceGross?: number | null, itemDiscountPriceNet?: number | null, product?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartProduct?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | null> | null, taxes?: Array<{ __typename?: 'fieldcollection_CoreShopTaxItem', name?: string | null, rate?: number | null, amount?: number | null } | null> | null, adjustmentItems?: Array<{ __typename?: 'fieldcollection_CoreShopAdjustment', typeIdentifier?: string | null, label?: string | null, pimcoreAmountNet?: number | null, pimcoreAmountGross?: number | null } | null> | null } | null } | { __typename?: 'CoreShopValidationError' } | null };
 
 export type GetCoreShopLatestProductsQueryVariables = Exact<{
   storeName: Scalars['String']['input'];
 }>;
 
 
-export type GetCoreShopLatestProductsQuery = { __typename?: 'Query', CoreShopLatestProducts?: { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopLatestProductsResult', products?: { __typename?: 'CoreShopProductConnection', edges?: Array<{ __typename?: 'CoreShopProductEdge', node?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | null> | null } | null } | { __typename?: 'CoreShopValidationError' } | null };
+export type GetCoreShopLatestProductsQuery = { __typename?: 'Query', CoreShopLatestProducts?: { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopLatestProductsResult', products?: { __typename?: 'CoreShopProductConnection', edges?: Array<{ __typename?: 'CoreShopProductEdge', node?: { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartProduct?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null } | null } | null> | null } | null } | { __typename?: 'CoreShopValidationError' } | null };
 
 export type GetCoreShopProductPriceQueryVariables = Exact<{
   productId: Scalars['Int']['input'];
@@ -1784,7 +1801,7 @@ export type GetCoreShopProductPriceQueryVariables = Exact<{
 
 export type GetCoreShopProductPriceQuery = { __typename?: 'Query', CoreShopProductPrice?: { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopProductPriceResult', price_net?: number | null, price_gross?: number | null, retail_price_net?: number | null, retail_price_gross?: number | null, discount_price_net?: number | null, discount_price_gross?: number | null, discount_net?: number | null, discount_gross?: number | null, tax_amount?: number | null, tax_rate?: number | null } | { __typename?: 'CoreShopValidationError' } | null };
 
-export type ProductFragment = { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null };
+export type ProductFragment = { __typename?: 'object_CoreShopProduct', id?: string | null, name?: string | null, isTracked?: boolean | null, stockAvailability?: boolean | null, shortDescription?: string | null, images?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartPreview?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null, imagesCartProduct?: Array<{ __typename?: 'asset', fullpath?: string | null } | null> | null };
 
 export type GetCoreShopProductQueryVariables = Exact<{
   productId: Scalars['Int']['input'];
@@ -1820,6 +1837,11 @@ export const ProductFragmentDoc = gql`
       fullpath(thumbnail: "coreshop_productCartPreview")
     }
   }
+  imagesCartProduct: images {
+    ... on asset {
+      fullpath(thumbnail: "coreshop_productCart")
+    }
+  }
   isTracked
   stockAvailability
   shortDescription
@@ -1827,11 +1849,20 @@ export const ProductFragmentDoc = gql`
     `;
 export const OrderItemFragmentDoc = gql`
     fragment orderItem on object_CoreShopOrderItem {
+  id
   quantity
   totalGross
   totalNet
   subtotalGross
   subtotalNet
+  itemRetailPriceGross
+  itemRetailPriceNet
+  itemDiscountNet
+  itemDiscountGross
+  itemDiscountPriceGross
+  itemDiscountPriceNet
+  itemRetailPriceNet
+  itemRetailPriceGross
   product {
     ...product
   }
@@ -1847,6 +1878,21 @@ export const OrderFragmentDoc = gql`
   subtotalNet
   items {
     ...orderItem
+  }
+  taxes {
+    ... on fieldcollection_CoreShopTaxItem {
+      name
+      rate
+      amount
+    }
+  }
+  adjustmentItems {
+    ... on fieldcollection_CoreShopAdjustment {
+      typeIdentifier
+      label
+      pimcoreAmountNet
+      pimcoreAmountGross
+    }
   }
 }
     ${OrderItemFragmentDoc}`;
@@ -2011,6 +2057,87 @@ export function useCoreShopOrderLazyQuery(variables: CoreShopOrderQueryVariables
   return VueApolloComposable.useLazyQuery<CoreShopOrderQuery, CoreShopOrderQueryVariables>(CoreShopOrderDocument, variables, options);
 }
 export type CoreShopOrderQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<CoreShopOrderQuery, CoreShopOrderQueryVariables>;
+export const CoreShopRemoveOrderItemDocument = gql`
+    mutation CoreShopRemoveOrderItem($orderItemId: Int!, $token: String!) {
+  CoreShopRemoveOrderItem(
+    removeOrderItem: {order: {token: $token}, orderItem: {id: $orderItemId}}
+  ) {
+    ... on CoreShopRemoveOrderItemResult {
+      order {
+        ...order
+      }
+    }
+    ... on CoreShopError {
+      ...error
+    }
+  }
+}
+    ${OrderFragmentDoc}
+${ErrorFragmentDoc}`;
+
+/**
+ * __useCoreShopRemoveOrderItemMutation__
+ *
+ * To run a mutation, you first call `useCoreShopRemoveOrderItemMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useCoreShopRemoveOrderItemMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useCoreShopRemoveOrderItemMutation({
+ *   variables: {
+ *     orderItemId: // value for 'orderItemId'
+ *     token: // value for 'token'
+ *   },
+ * });
+ */
+export function useCoreShopRemoveOrderItemMutation(options: VueApolloComposable.UseMutationOptions<CoreShopRemoveOrderItemMutation, CoreShopRemoveOrderItemMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<CoreShopRemoveOrderItemMutation, CoreShopRemoveOrderItemMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<CoreShopRemoveOrderItemMutation, CoreShopRemoveOrderItemMutationVariables>(CoreShopRemoveOrderItemDocument, options);
+}
+export type CoreShopRemoveOrderItemMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CoreShopRemoveOrderItemMutation, CoreShopRemoveOrderItemMutationVariables>;
+export const CoreShopUpdateOrderItemDocument = gql`
+    mutation CoreShopUpdateOrderItem($orderItemId: Int!, $quantity: Float!, $token: String!) {
+  CoreShopUpdateOrderItem(
+    updateOrderItem: {order: {token: $token}, orderItem: {id: $orderItemId, quantity: $quantity}}
+  ) {
+    ... on CoreShopUpdateOrderItemResult {
+      order {
+        ...order
+      }
+    }
+    ... on CoreShopError {
+      ...error
+    }
+  }
+}
+    ${OrderFragmentDoc}
+${ErrorFragmentDoc}`;
+
+/**
+ * __useCoreShopUpdateOrderItemMutation__
+ *
+ * To run a mutation, you first call `useCoreShopUpdateOrderItemMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useCoreShopUpdateOrderItemMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useCoreShopUpdateOrderItemMutation({
+ *   variables: {
+ *     orderItemId: // value for 'orderItemId'
+ *     quantity: // value for 'quantity'
+ *     token: // value for 'token'
+ *   },
+ * });
+ */
+export function useCoreShopUpdateOrderItemMutation(options: VueApolloComposable.UseMutationOptions<CoreShopUpdateOrderItemMutation, CoreShopUpdateOrderItemMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<CoreShopUpdateOrderItemMutation, CoreShopUpdateOrderItemMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<CoreShopUpdateOrderItemMutation, CoreShopUpdateOrderItemMutationVariables>(CoreShopUpdateOrderItemDocument, options);
+}
+export type CoreShopUpdateOrderItemMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CoreShopUpdateOrderItemMutation, CoreShopUpdateOrderItemMutationVariables>;
 export const GetCoreShopLatestProductsDocument = gql`
     query getCoreShopLatestProducts($storeName: String!) {
   CoreShopLatestProducts(latestProducts: {store: {storeName: $storeName}}) {

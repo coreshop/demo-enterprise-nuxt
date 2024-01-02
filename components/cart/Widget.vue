@@ -7,11 +7,11 @@
       <button type="button" class="btn btn-block btn-lg dropdown-toggle" data-toggle="dropdown">
         <i class="fa fa-shopping-cart"></i>
         <span id="cart-overview-total">
-            <span class="cart-badge">{{ cart ? cart.items.length : 0 }}</span> Items -
+            <span class="cart-badge">{{ cart && cart.items ? cart.items.length : 0 }}</span> Items -
             <span class="cart-total"> <PriceWidget :price="cart ? cart.totalGross : 0" /></span>
         </span>
       </button>
-      <ul v-if="cart && cart.items.length > 0" class="dropdown-menu pull-right" aria-labelledby="dropdownMenuButton">
+      <ul v-if="cart && cart.items && cart.items.length > 0" class="dropdown-menu pull-right" aria-labelledby="dropdownMenuButton">
         <li>
           <table class="table hcart cart-items">
             <tr v-for="item in cart.items" :key="item.id">
@@ -58,11 +58,9 @@
             </tbody>
           </table>
           <p class="text-right btn-block1">
-<!--            {% if is_granted('CORESHOP_CART_SUMMARY') %}-->
-<!--            <a href="{{ path('coreshop_cart_summary') }}">-->
-<!--              {{ 'coreshop.ui.cart'|trans }}-->
-<!--            </a>-->
-<!--            {% endif %}-->
+            <nuxt-link :href="`/cart`">
+              Cart
+            </nuxt-link>
 
 <!--            {% if is_granted('CORESHOP_CHECKOUT') %}-->
 <!--            <a href="{{ path('coreshop_checkout', {'stepIdentifier': coreshop_checkout_steps_get_first()}) }}">-->

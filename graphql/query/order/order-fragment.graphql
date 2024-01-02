@@ -10,4 +10,19 @@ fragment order on object_CoreShopOrder {
     items {
         ...orderItem
     }
+    taxes {
+        ... on fieldcollection_CoreShopTaxItem {
+            name
+            rate
+            amount
+        }
+    }
+    adjustmentItems {
+        ... on fieldcollection_CoreShopAdjustment {
+            typeIdentifier
+            label
+            pimcoreAmountNet
+            pimcoreAmountGross
+        }
+    }
 }
