@@ -39,9 +39,9 @@ export const useCartStore = defineStore({
                     }
                 }
 
-                this.cartLoading = false;
             }
-
+            
+            this.cartLoading = false;
         },
         async addToOrder(productId: number, quantity: number): Promise<void> {
             const client = useApolloClient();
