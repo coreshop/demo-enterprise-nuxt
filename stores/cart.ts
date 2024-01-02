@@ -40,7 +40,7 @@ export const useCartStore = defineStore({
                 }
 
             }
-            
+
             this.cartLoading = false;
         },
         async addToOrder(productId: number, quantity: number): Promise<void> {
@@ -48,6 +48,8 @@ export const useCartStore = defineStore({
 
             const {loading, mutate, onError} = useCoreShopAddToOrderMutation();
 
+            this.cartLoading = true;
+            
             try {
                 const data = await mutate({
                     productId: productId,
@@ -67,6 +69,8 @@ export const useCartStore = defineStore({
             } catch (error) {
                 console.error('Fehler beim Hinzufügen zum Warenkorb:', error);
             }
+
+            this.cartLoading = true;
         },
     }
 })
