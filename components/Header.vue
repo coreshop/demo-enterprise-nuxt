@@ -42,9 +42,9 @@
 
           <div class="col-md-6">
             <div id="logo">
-              <a href="/">
+              <nuxt-link :href="`/`">
                 <img src="~/assets/images/logo-full.svg" title="CoreShop" alt="CoreShop" class="img-fluid" width="300"/>
-              </a>
+              </nuxt-link>
             </div>
           </div>
 
