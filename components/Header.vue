@@ -18,9 +18,6 @@
               <li class="nav-item">
                 <nuxt-link :href="`#`" class="nav-link">Wishlist</nuxt-link>
               </li>
-              <li class="nav_item">
-                <CartWidget/>
-              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">

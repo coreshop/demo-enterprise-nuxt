@@ -20,22 +20,10 @@
               {{ product.shortDescription }}
             </div>
 
-            <div class="price">
-              <span class="price-new">€{{ product.price.toFixed(2) }}</span>
-            </div>
+            <product-price-widget :product="product" :show-tax="false" />
 
             <div class="cart-button btn-group">
-              <form name="coreshop" method="post" action="">
-                <div class="input-group">
-                  <div><input type="number" name="quantity" required="required" class="form-control cart-item-quantity"
-                              value="1"></div>
-                  <div class="input-group-append ml-2">
-                    <button type="submit" class="btn btn-cart mt-0" rel="nofollow">
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              </form>
+              <ProductAddToOrder :product="product" />
             </div>
           </div>
         </div>

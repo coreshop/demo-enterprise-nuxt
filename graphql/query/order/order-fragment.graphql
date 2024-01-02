@@ -1,0 +1,13 @@
+#import "order-item-fragment.graphql"
+
+fragment order on object_CoreShopOrder {
+    id
+    token
+    totalGross
+    totalNet
+    subtotalGross
+    subtotalNet
+    items {
+        ...orderItem
+    }
+}

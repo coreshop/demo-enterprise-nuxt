@@ -34,7 +34,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "CoreShop Headless DEmo",
+      title: "CoreShop Headless Demo",
       // link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}],
       script: [
         {
@@ -44,10 +44,10 @@ export default defineNuxtConfig({
           src: "/js/vendor/owl.carousel.min.js",
         },
         {
-          src: "/js/vendor/bootstrap.js",
+          src: "/js/vendor/popper.js",
         },
         {
-          src: "/js/vendor/popper.js",
+          src: "/js/vendor/bootstrap.js",
         },
       ]
     }

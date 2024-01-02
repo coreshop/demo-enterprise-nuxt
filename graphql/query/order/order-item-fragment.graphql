@@ -1,0 +1,12 @@
+#import "../product/product-fragment.graphql"
+
+fragment orderItem on object_CoreShopOrderItem {
+    quantity
+    totalGross
+    totalNet
+    subtotalGross
+    subtotalNet
+    product {
+        ...product
+    }
+}

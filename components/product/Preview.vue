@@ -18,17 +18,7 @@
       <product-price-widget :product="product" />
 
       <div class="cart-button">
-        <form name="coreshop" method="post" action="">
-          <div class="input-group">
-            <div><input type="number" name="quantity" required="required" class="form-control cart-item-quantity"
-                        value="1"></div>
-            <div class="input-group-append ml-2">
-              <button type="submit" class="btn btn-cart mt-0" rel="nofollow">
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        </form>
+        <ProductAddToOrder :product="product" />
       </div>
     </div>
   </div>

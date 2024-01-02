@@ -1,69 +1,71 @@
 import {defineStore} from 'pinia'
+import {useCoreShopAddToOrderMutation, useCoreShopOrderLazyQuery, useCoreShopOrderQuery} from "~/graphql/generated";
+import type {Object_CoreShopOrder} from "~/graphql/generated";
+
+interface CartStoreState {
+    cart: null | Object_CoreShopOrder;
+    cartToken: null | string;
+    cartLoading: boolean;
+}
 
 export const useCartStore = defineStore({
     id: 'cart',
-    state: () => ({
-        cart: {},
+    state: (): CartStoreState => ({
+        cart: null,
+        cartLoading: true,
+        cartToken: null,
+
     }),
     actions: {
-        async loadCart() {
-            const query = gql`
-            query {
-              CoreShopActiveOrder(activeOrder: {store: {storeName: "Standard"}}) {
-                ... on CoreShopActiveOrderResult {
-                  order {
-                    id,
-                    ... on object_CoreShopOrder {
-                      token,
-                      store {
-                        ... on CoreshopStore {name}
-                      }
-                      items {
-                        ... on object_CoreShopOrderItem {
-                          id,
-                          totalNet
-                          totalGross
-                          subtotalNet
-                          subtotalGross
-                          product {
-                            ... on object_CoreShopProduct {
-                              id
-                            }
-                          }
-                        }
-                      }
-                      totalNet
-                      totalGross
-                      subtotalNet
-                      subtotalGross
-                      adjustmentItems {
-                        ... on fieldcollection_CoreShopAdjustment {
-                          typeIdentifier
-                          label
-                          pimcoreAmountNet
-                          pimcoreAmountGross
-                        }
-                      }
+        async loadCartIfAvailable(): Promise<void> {
+            if (!process.client) {
+                return;
+            }
+
+            this.cartToken = localStorage.getItem('coreShopOrderToken');
+
+            if (this.cartToken) {
+                this.cartLoading = true;
+
+                const {load} = useCoreShopOrderLazyQuery({
+                    token: this.cartToken
+                });
+
+                const data = await load();
+
+                if (data && data?.CoreShopOrder?.__typename === 'CoreShopOrderResult') {
+                    if (data.CoreShopOrder.order?.__typename === 'object_CoreShopOrder') {
+                        this.cart = data.CoreShopOrder.order;
                     }
-                  }
                 }
-                ... on CoreShopError {
-                  message
-                }
-              }
-            }`;
 
-            const data:any = await useAsyncQuery(query);
+                this.cartLoading = false;
+            }
 
-            if (data.data?.CoreShopActiveOrder?.order !== null) {
-                if (data.data?.CoreShopActiveOrder?.order.__typename === 'CoreShopError') {
-                    //Create New Order
-                    this.cart = {
-                        token: 'asdfasdf',
-                    };
-                } else {
-                    this.cart = data.data.CoreShopActiveOrder;
+        },
+        async addToOrder(productId: number, quantity: number): Promise<void> {
+            const client = useApolloClient();
+
+            const {loading, mutate, onError} = useCoreShopAddToOrderMutation();
+
+            try {
+                const data = await mutate({
+                    productId: productId,
+                    quantity: quantity,
+                    storeName: 'Standard',
+                    token: this.cartToken
+                });
+
+                if (data?.data?.CoreShopAddToOrder?.__typename === 'CoreShopAddToOrderResult') {
+                    if (data?.data.CoreShopAddToOrder?.order?.__typename === 'object_CoreShopOrder') {
+                        this.cart = data?.data.CoreShopAddToOrder.order;
+
+                        localStorage.setItem('coreShopOrderToken', this.cart.token || '');
+                    }
                 }
+
+            } catch (error) {
+                console.error('Fehler beim Hinzufügen zum Warenkorb:', error);
             }
         },
     }
