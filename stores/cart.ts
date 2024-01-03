@@ -72,6 +72,7 @@ export const useCartStore = defineStore({
                     if (data?.data.CoreShopAddToOrder?.order?.__typename === 'object_CoreShopOrder') {
                         this.cart = data?.data.CoreShopAddToOrder.order;
 
+                        this.cartToken = this.cart.token || '';
                         localStorage.setItem('coreShopOrderToken', this.cart.token || '');
                     }
                 }
