@@ -16,9 +16,7 @@ import { useGetCoreShopLatestProductsQuery } from "../../graphql/generated";
 
 export default defineComponent({
   setup() {
-    const { result, loading, error } = useGetCoreShopLatestProductsQuery({
-      storeName: "Standard",
-    });
+    const { result, loading, error } = useGetCoreShopLatestProductsQuery();
 
     const products = computed(() => {
       if (

@@ -2,8 +2,8 @@
 #import "product-fragment.graphql"
 #import "../error.graphql"
 
-query getCoreShopLatestProducts($storeName: String!) {
-  CoreShopLatestProducts(latestProducts: {store: {storeName: $storeName}}) {
+query getCoreShopLatestProducts {
+  CoreShopLatestProducts {
     ... on CoreShopLatestProductsResult {
       products {
         edges {

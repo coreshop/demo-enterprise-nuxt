@@ -64,7 +64,6 @@ export const useCartStore = defineStore({
                 const data = await mutate({
                     productId: productId,
                     quantity: quantity,
-                    storeName: 'Standard',
                     token: this.cartToken
                 });
 

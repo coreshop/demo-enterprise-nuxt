@@ -19,13 +19,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useGetCoreShopCategoriesQuery } from "../../graphql/generated";
+import { useGetCoreShopCategoriesQuery } from "@/graphql/generated";
 
 export default defineComponent({
   setup() {
-    const { result, loading, error } = useGetCoreShopCategoriesQuery({
-      storeName: "Standard",
-    });
+    const { result, loading, error } = useGetCoreShopCategoriesQuery();
 
     const categories = computed(() => {
       if (

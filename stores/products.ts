@@ -9,7 +9,6 @@ export const useProductStore = defineStore({
         getProductPrice(id: number) {
             const { result, loading, error } = useGetCoreShopProductPriceQuery({
             productId: id,
-            storeName: 'Standard'
           });
 
           const price = computed(() => {
