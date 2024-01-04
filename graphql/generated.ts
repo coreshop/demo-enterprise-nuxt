@@ -671,6 +671,7 @@ export type LocaleInput = {
 };
 
 export type LoginInput = {
+  orderToken?: InputMaybe<Scalars['String']['input']>;
   password: Scalars['String']['input'];
   username: Scalars['String']['input'];
 };
@@ -1732,6 +1733,15 @@ export type SrcsetResolutionsArgs = {
   types?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
 };
 
+export type CoreShopAuthorizeMutationVariables = Exact<{
+  username: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+  orderToken?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type CoreShopAuthorizeMutation = { __typename?: 'Mutations', CoreShopAuthorize?: { __typename?: 'CoreShopAuthorizeResult', token?: string | null } | { __typename?: 'CoreShopError', message?: string | null } | { __typename?: 'CoreShopValidationError' } | null };
+
 export type GetCoreShopCategoriesQueryVariables = Exact<{
   storeName: Scalars['String']['input'];
 }>;
@@ -1896,6 +1906,44 @@ export const OrderFragmentDoc = gql`
   }
 }
     ${OrderItemFragmentDoc}`;
+export const CoreShopAuthorizeDocument = gql`
+    mutation CoreShopAuthorize($username: String!, $password: String!, $orderToken: String) {
+  CoreShopAuthorize(
+    authorize: {username: $username, password: $password, orderToken: $orderToken}
+  ) {
+    ... on CoreShopAuthorizeResult {
+      token
+    }
+    ... on CoreShopError {
+      message
+    }
+  }
+}
+    `;
+
+/**
+ * __useCoreShopAuthorizeMutation__
+ *
+ * To run a mutation, you first call `useCoreShopAuthorizeMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useCoreShopAuthorizeMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useCoreShopAuthorizeMutation({
+ *   variables: {
+ *     username: // value for 'username'
+ *     password: // value for 'password'
+ *     orderToken: // value for 'orderToken'
+ *   },
+ * });
+ */
+export function useCoreShopAuthorizeMutation(options: VueApolloComposable.UseMutationOptions<CoreShopAuthorizeMutation, CoreShopAuthorizeMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<CoreShopAuthorizeMutation, CoreShopAuthorizeMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<CoreShopAuthorizeMutation, CoreShopAuthorizeMutationVariables>(CoreShopAuthorizeDocument, options);
+}
+export type CoreShopAuthorizeMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CoreShopAuthorizeMutation, CoreShopAuthorizeMutationVariables>;
 export const GetCoreShopCategoriesDocument = gql`
     query getCoreShopCategories($storeName: String!) {
   CoreShopCategories(categoryListing: {store: {storeName: $storeName}}) {

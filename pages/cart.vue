@@ -1,5 +1,6 @@
 <template>
    <NuxtLayout>
+     <CheckoutSteps :step="`cart`"/>
     <CartOverview v-if="cart" :cart="cart"/>
    </NuxtLayout>
 </template>

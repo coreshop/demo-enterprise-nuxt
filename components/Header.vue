@@ -48,7 +48,9 @@
             </div>
           </div>
 
-          <CartWidget/>
+          <client-only>
+            <CartWidget/>
+          </client-only>
         </div>
       </div>
     </div>
@@ -56,3 +58,5 @@
     <CategoryMenu/>
   </header>
 </template>
+<script setup lang="ts">
+</script>
