@@ -56,7 +56,7 @@ import type { ProductFragment } from "~/graphql/generated";
 export default defineComponent({
   props: {
     product: {
-      type: Object as PropType<ProductFragment>,
+      type: Object as PropType<ProductFragment & { ean?: string | null }>,
       default: {},
       required: true
     },

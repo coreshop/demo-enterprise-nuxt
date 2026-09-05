@@ -12,7 +12,7 @@
       </td>
       <td class="text-center">
         <div class="input-group">
-          <input type="number" required="required" min="1" autocomplete="off" class="form-control" v-model="quantity" @change="updateCartQuantity">
+          <input type="number" required min="1" autocomplete="off" class="form-control" v-model="quantity" @change="updateCartQuantity">
         </div>
       </td>
       <td class="text-right cart-item-price">
@@ -33,18 +33,18 @@
 </template>
 <script lang="ts">
 
-import type {Object_CoreShopOrder, Object_CoreShopOrderItem} from "~/graphql/generated";
+import type {OrderFragment, OrderItemFragment} from "~/graphql/generated";
 import type {PropType} from "vue";
 
 export default defineComponent({
   props: {
     cart: {
-      type: Object as PropType<Object_CoreShopOrder>,
+      type: Object as PropType<OrderFragment>,
       default: null,
       required: true,
     },
     item: {
-      type: Object as PropType<Object_CoreShopOrderItem>,
+      type: Object as PropType<OrderItemFragment>,
       default: null,
       required: true,
     },

@@ -75,14 +75,14 @@
 </template>
 <script lang="ts">
 
-import type {Object_CoreShopOrder} from "~/graphql/generated";
+import type {OrderFragment} from "~/graphql/generated";
 
 export default defineComponent({
   props: {
 
   },
   computed: {
-    cart(): Object_CoreShopOrder | null {
+    cart(): OrderFragment | null {
       const cartStore = useCartStore();
       return cartStore.cart;
     },

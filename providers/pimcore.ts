@@ -1,17 +1,11 @@
 import { joinURL } from 'ufo'
-import type { ProviderGetImage } from '@nuxt/image'
+import { defineProvider } from '@nuxt/image/runtime'
 
-export const getImage: ProviderGetImage = (
-    src,
-    { modifiers = {}, baseURL } = {}
-) => {
-
-    if (!baseURL) {
-        // also support runtime config
-        baseURL = useRuntimeConfig().public.siteUrl
-    }
-
-    return {
-        url: joinURL(baseURL, src),
-    }
-}
+/**
+ * Serves Pimcore assets and thumbnails from the shop host (runtime config `baseUrl`).
+ */
+export default defineProvider({
+  getImage: (src) => ({
+    url: joinURL(useRuntimeConfig().public.baseUrl, src),
+  }),
+})

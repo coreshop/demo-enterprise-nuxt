@@ -18,12 +18,11 @@ import { useGetCoreShopCategoryQuery, useGetCoreShopProductsInCategoryQuery } fr
 export default defineComponent({
   setup() {
     const id = parseInt(useRoute().params.slug as string);
-    const { result: resultCategory, loading: loadingCategories, error: errorCategories } = useGetCoreShopCategoryQuery({
-      categoryId: id,
-      fetchPolicy: "cache-first"
-    });
+    const { result: resultCategory, loading: loadingCategories, error: errorCategories } = useGetCoreShopCategoryQuery(
+      { categoryId: id },
+      { fetchPolicy: "cache-first" },
+    );
     const { result: resultProducts, loading: loadingProducts, error: errorProducts } = useGetCoreShopProductsInCategoryQuery({
-      storeName: "Standard",
       categoryId: id,
     });
 

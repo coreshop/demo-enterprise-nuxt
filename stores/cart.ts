@@ -6,7 +6,6 @@ import {
     useCoreShopUpdateOrderItemMutation
 } from "~/graphql/generated";
 import type {Object_CoreShopOrder} from "~/graphql/generated";
-import {DEFAULT_OPERATION_TYPE_NAME_MAP} from "@graphql-tools/merge/typings/typedefs-mergers/schema-def";
 
 interface CartStoreState {
     cart: null | Object_CoreShopOrder;
@@ -14,8 +13,7 @@ interface CartStoreState {
     cartLoading: boolean;
 }
 
-export const useCartStore = defineStore({
-    id: 'cart',
+export const useCartStore = defineStore('cart', {
     state: (): CartStoreState => ({
         cart: null,
         cartLoading: true,
@@ -24,7 +22,7 @@ export const useCartStore = defineStore({
     }),
     actions: {
         async loadCartIfAvailable(): Promise<void> {
-            if (!process.client) {
+            if (!import.meta.client) {
                 return;
             }
 
@@ -55,8 +53,7 @@ export const useCartStore = defineStore({
             this.cartLoading = false;
         },
         async addToOrder(productId: number, quantity: number): Promise<void> {
-            const client = useApolloClient();
-            const {loading, mutate, onError} = useCoreShopAddToOrderMutation();
+            const {mutate} = useCoreShopAddToOrderMutation();
 
             this.cartLoading = true;
 
@@ -83,8 +80,7 @@ export const useCartStore = defineStore({
             this.cartLoading = false;
         },
         async updateOrderItem(orderItemId: number, quantity: number): Promise<void> {
-            const client = useApolloClient();
-            const {loading, mutate, onError} = useCoreShopUpdateOrderItemMutation();
+            const {mutate} = useCoreShopUpdateOrderItemMutation();
 
             if (!this.cartToken) {
                 return;
@@ -112,8 +108,7 @@ export const useCartStore = defineStore({
             this.cartLoading = false;
         },
         async removeOrderItem(orderItemId: number): Promise<void> {
-            const client = useApolloClient();
-            const {loading, mutate, onError} = useCoreShopRemoveOrderItemMutation();
+            const {mutate} = useCoreShopRemoveOrderItemMutation();
 
             if (!this.cartToken) {
                 return;
