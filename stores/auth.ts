@@ -1,5 +1,4 @@
 import {defineStore} from 'pinia';
-import {useApolloClient} from '@vue/apollo-composable';
 import {useCoreShopAuthorizeMutation} from "~/graphql/generated";
 
 interface AuthStoreState {
@@ -13,8 +12,7 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         async login(username: string, password: string) {
             const cartStore = useCartStore();
-            const client = useApolloClient();
-            const {loading, mutate, onError} = useCoreShopAuthorizeMutation();
+            const {mutate} = useCoreShopAuthorizeMutation();
 
             try {
                 const data = await mutate({
@@ -28,7 +26,7 @@ export const useAuthStore = defineStore('auth', {
 
                     const { onLogin } = useApollo()
 
-                    onLogin(this.token);
+                    await onLogin(this.token);
                 }
             } catch (error) {
                 console.error('Login failed:', error);

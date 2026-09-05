@@ -1,9 +1,22 @@
-export default defineNuxtPlugin((nuxtApp) => {
-    nuxtApp.hook('apollo:error', (error) => {
-        const { onLogout } = useApollo()
+import { DefaultApolloClient, provideApolloClient } from '@vue/apollo-composable'
+import { createCoreShopApolloClient, TOKEN_STORAGE_KEY } from '~/composables/useApollo'
 
-        if (error.networkError?.result?.code === 401 && error.networkError?.result?.message == "Expired JWT Token") {
-            onLogout();
-        }
-    });
-});
+export default defineNuxtPlugin((nuxtApp) => {
+  const { apiUrl } = useRuntimeConfig().public
+
+  const client = createCoreShopApolloClient(apiUrl, () => {
+    if (import.meta.client) {
+      localStorage.removeItem(TOKEN_STORAGE_KEY)
+    }
+    useAuthStore().token = null
+  })
+
+  nuxtApp.vueApp.provide(DefaultApolloClient, client)
+  provideApolloClient(client)
+
+  return {
+    provide: {
+      apolloClient: client,
+    },
+  }
+})

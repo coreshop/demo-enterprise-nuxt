@@ -1,0 +1,30 @@
+name: Dependency update
+
+# Weekly npm dependency update as a pull request.
+
+on:
+  schedule:
+    - cron: "0 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm update --no-audit --no-fund
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/npm-update
+          title: "Update npm dependencies"
+          commit-message: "Update npm dependencies"
+          body: "Scheduled `npm update`."
+          delete-branch: true

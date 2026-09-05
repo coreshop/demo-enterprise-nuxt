@@ -2,8 +2,7 @@ import {defineStore} from 'pinia'
 import { useGetCoreShopProductPriceQuery } from '@/graphql/generated'
 
 
-export const useProductStore = defineStore({
-    id: 'product',
+export const useProductStore = defineStore('product', {
     state: () => ({}),
     actions: {
         getProductPrice(id: number) {

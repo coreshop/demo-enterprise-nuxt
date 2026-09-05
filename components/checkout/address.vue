@@ -3,13 +3,13 @@
 </template>
 <script lang="ts">
 
-import type {Object_CoreShopOrder} from "~/graphql/generated";
+import type {OrderFragment} from "~/graphql/generated";
 import type {PropType} from "vue";
 
 export default defineComponent({
   props: {
     cart: {
-      type: Object as PropType<Object_CoreShopOrder>,
+      type: Object as PropType<OrderFragment>,
       default: null,
       required: true,
     },

@@ -1,0 +1,90 @@
+name: Build
+
+# Builds the storefront image and, on pushes to main, pushes it to the GitHub Container Registry
+# (ghcr.io/coreshop/demo-enterprise-nuxt) and bumps the image tag in the manifest repository.
+# Secrets: GITHUB_TOKEN (packages: write) for the registry and the org secrets
+# GH_APP_ID / GH_APP_PRIVATE_KEY of the coreshop GitHub App, which must be installed on the
+# manifest repository with contents: write.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  IMAGE: ghcr.io/coreshop/demo-enterprise-nuxt
+  MANIFEST_REPO: coreshop/demo-enterprise-manifest
+
+jobs:
+  build:
+    name: Build image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Image tag
+        id: tag
+        run: echo "tag=main-$(git rev-parse --short=8 HEAD)" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ${{ env.IMAGE }}:${{ steps.tag.outputs.tag }}
+            ${{ env.IMAGE }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  manifest:
+    name: Update manifest
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Image tag
+        id: tag
+        run: echo "tag=main-$(echo ${{ github.sha }} | cut -c1-8)" >> "$GITHUB_OUTPUT"
+
+      - name: Create app token
+        id: app-token
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+        with:
+          app-id: ${{ secrets.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          owner: coreshop
+          repositories: demo-enterprise-manifest
+
+      - name: Checkout manifest
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.MANIFEST_REPO }}
+          token: ${{ steps.app-token.outputs.token }}
+          path: manifest
+
+      - name: Set image tag
+        working-directory: manifest
+        env:
+          TAG: ${{ steps.tag.outputs.tag }}
+          IMAGE: ${{ env.IMAGE }}
+        run: |
+          yq -i '.headless.image.name = strenv(IMAGE) | .headless.image.tag = strenv(TAG)' values.yaml
+          git config user.name "demo-enterprise-nuxt-ci"
+          git config user.email "demo-enterprise-nuxt-ci@cors.gmbh"
+          git commit -am "update nuxt storefront image tag to $TAG" || echo "nothing to commit"
+          git push origin HEAD:main

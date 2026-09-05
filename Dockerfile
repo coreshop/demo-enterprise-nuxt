@@ -1,28 +1,33 @@
-FROM node:18-alpine as builder
+ARG NODE_VERSION=22
+
+FROM node:${NODE_VERSION}-alpine AS builder
 
 WORKDIR /app
 
-RUN apk --no-cache add openssh g++ make python3 git
+COPY package.json package-lock.json ./
+RUN npm ci --no-audit --no-fund
 
-COPY package.json /app/
-COPY package-lock.json /app/
+COPY . .
 
-RUN yarn install && yarn cache clean --force
+ENV NUXT_TELEMETRY_DISABLED=1
+RUN npm run build
 
-ADD . /app
-
-ARG API_URL
-ENV API_URL=$API_URL
-
-RUN yarn run build
-
-FROM node:18-alpine
+FROM node:${NODE_VERSION}-alpine
 
 WORKDIR /app
 
-COPY --from=builder /app/.output  /app
+COPY --from=builder /app/.output ./
 
-ENV HOST 0.0.0.0
+# The GraphQL endpoint and the shop base URL are runtime configuration, the same image
+# runs against every environment:
+#   NUXT_PUBLIC_API_URL   https://<shop>/pimcore-graphql-webservices/coreshop?apikey=<key>
+#   NUXT_PUBLIC_BASE_URL  https://<shop>
+ENV HOST=0.0.0.0 \
+    PORT=3000 \
+    NODE_ENV=production
+
 EXPOSE 3000
 
-ENTRYPOINT ["node", "server/index.mjs"]
+USER node
+
+CMD ["node", "server/index.mjs"]

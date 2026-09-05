@@ -11,8 +11,8 @@
           </p>
 
           <form @submit.prevent="login">
-            <div class="form-group"><label for="_username" class="required">Email</label><input type="text" id="_username" name="_username" autocomplete="username" v-model="username" required="" class="form-control"></div>
-            <div class="form-group"><label for="_password" class="required">Password</label><input type="password" id="_password" name="_password" autocomplete="current-password" v-model="password" required="" class="form-control"></div>
+            <div class="form-group"><label for="_username" class="required">Email</label><input type="text" id="_username" name="_username" autocomplete="username" v-model="username" required class="form-control"></div>
+            <div class="form-group"><label for="_password" class="required">Password</label><input type="password" id="_password" name="_password" autocomplete="current-password" v-model="password" required class="form-control"></div>
             <button type="submit" class="btn-success btn submit button">Login</button>
           </form>
         </div>
