@@ -32,5 +32,6 @@
     "@graphql-codegen/typescript-vue-apollo": "^5.0.1",
     "typescript": "^5.9.0",
     "vue-tsc": "^3.0.0"
-  }
+  },
+  "license": "SEE LICENSE IN LICENSE.md"
 }
